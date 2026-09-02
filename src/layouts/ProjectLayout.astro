@@ -1,0 +1,32 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import { ArrowLeft } from 'lucide-react';
+import { copy, withBase, type Locale } from '../lib/i18n';
+
+interface Props {
+  frontmatter: {
+    title: string;
+    summary: string;
+    locale: Locale;
+    role: string;
+    period: string;
+    technologies: string[];
+  };
+}
+const { frontmatter } = Astro.props;
+const { locale } = frontmatter;
+---
+
+<BaseLayout locale={locale} title={`${frontmatter.title} | Ting-Ya Yang`} description={frontmatter.summary}>
+  <article class="case-study">
+    <a class="back-link" href={withBase(locale === 'zh' ? '/' : '/en/')}><ArrowLeft size={17} />{copy[locale].back}</a>
+    <header class="case-header">
+      <p class="eyebrow">{frontmatter.role} · {frontmatter.period}</p>
+      <h1>{frontmatter.title}</h1>
+      <p class="case-summary">{frontmatter.summary}</p>
+      <ul class="tag-list">{frontmatter.technologies.map((item) => <li>{item}</li>)}</ul>
+    </header>
+    <div class="case-hero" aria-hidden="true"><span>TY / 01</span></div>
+    <div class="prose"><slot /></div>
+  </article>
+</BaseLayout>

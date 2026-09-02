@@ -1,0 +1,42 @@
+---
+import ThemeToggle from './ThemeToggle';
+import MobileMenu from './MobileMenu';
+import { copy, withBase, type Locale } from '../lib/i18n';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = copy[locale];
+const home = locale === 'zh' ? '/' : '/en/';
+const otherHome = locale === 'zh' ? '/en/' : '/';
+---
+
+<header class="site-header">
+  <a class="wordmark" href={withBase(home)} aria-label="Ting-Ya Yang home">
+    <span>TY</span>
+    <strong>Ting-Ya Yang</strong>
+  </a>
+
+  <nav class="desktop-nav" aria-label={locale === 'zh' ? '主导航' : 'Main navigation'}>
+    <a href={withBase(`${home}#work`)}>{t.nav.work}</a>
+    <a href={withBase(`${home}#experience`)}>{t.nav.experience}</a>
+    <a href={withBase(`${home}#about`)}>{t.nav.about}</a>
+  </nav>
+
+  <div class="header-actions">
+    <a class="language-link" href={withBase(otherHome)} hreflang={locale === 'zh' ? 'en' : 'zh-CN'}>
+      {t.otherLocale}
+    </a>
+    <ThemeToggle client:load label={locale === 'zh' ? '切换明暗主题' : 'Toggle color theme'} />
+    <MobileMenu
+      client:load
+      label={locale === 'zh' ? '打开导航菜单' : 'Open navigation menu'}
+      closeLabel={locale === 'zh' ? '关闭导航菜单' : 'Close navigation menu'}
+      navLabel={locale === 'zh' ? '移动端导航' : 'Mobile navigation'}
+      links={[
+        { href: withBase(`${home}#work`), label: t.nav.work },
+        { href: withBase(`${home}#experience`), label: t.nav.experience },
+        { href: withBase(`${home}#about`), label: t.nav.about },
+      ]}
+    />
+  </div>
+</header>

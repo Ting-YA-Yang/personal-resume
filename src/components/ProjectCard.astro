@@ -1,0 +1,41 @@
+---
+import { ArrowUpRight } from 'lucide-react';
+import { copy, withBase, type Locale } from '../lib/i18n';
+
+interface Props {
+  locale: Locale;
+  title: string;
+  summary: string;
+  role: string;
+  period: string;
+  technologies: string[];
+  slug: string;
+}
+
+const { locale, title, summary, role, period, technologies, slug } = Astro.props;
+const href = locale === 'zh' ? `/projects/${slug}/` : `/en/projects/${slug}/`;
+---
+
+<article class="project-card">
+  <a class="project-visual" href={withBase(href)} aria-label={`${copy[locale].viewCase}: ${title}`}>
+    <div class="visual-window" aria-hidden="true">
+      <div class="visual-toolbar"><i></i><i></i><i></i></div>
+      <div class="visual-layout">
+        <span class="visual-index">01</span>
+        <div>
+          <span class="visual-line wide"></span>
+          <span class="visual-line"></span>
+          <span class="visual-block"></span>
+        </div>
+      </div>
+    </div>
+  </a>
+  <div class="project-copy">
+    <div class="project-meta"><span>{role}</span><span>{period}</span></div>
+    <h3><a href={withBase(href)}>{title}<ArrowUpRight size={22} /></a></h3>
+    <p>{summary}</p>
+    <ul class="tag-list" aria-label="Technologies">
+      {technologies.map((technology) => <li>{technology}</li>)}
+    </ul>
+  </div>
+</article>

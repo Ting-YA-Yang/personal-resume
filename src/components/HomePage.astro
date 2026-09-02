@@ -1,0 +1,81 @@
+---
+import { ArrowDown, ArrowUpRight } from 'lucide-react';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectCard from './ProjectCard.astro';
+import { copy, type Locale } from '../lib/i18n';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = copy[locale];
+
+const project = locale === 'zh'
+  ? {
+      title: '个人简历与作品集',
+      summary: '一个快速、可访问且易于长期维护的双语个人网站。',
+      role: '设计与开发', period: '2026', technologies: ['Astro', 'TypeScript', 'MDX'], slug: 'personal-site',
+    }
+  : {
+      title: 'Personal resume & portfolio',
+      summary: 'A fast, accessible bilingual home for selected work and professional experience.',
+      role: 'Design & development', period: '2026', technologies: ['Astro', 'TypeScript', 'MDX'], slug: 'personal-site',
+    };
+
+const experience = locale === 'zh'
+  ? [
+      { period: '2024 — 至今', role: '软件工程师', company: '公司名称', detail: '负责核心产品体验与前端工程建设。' },
+      { period: '2022 — 2024', role: '前端工程师', company: '公司名称', detail: '构建可复用界面系统并推动产品交付。' },
+    ]
+  : [
+      { period: '2024 — Present', role: 'Software Engineer', company: 'Company name', detail: 'Building core product experiences and frontend foundations.' },
+      { period: '2022 — 2024', role: 'Frontend Engineer', company: 'Company name', detail: 'Created reusable interface systems and shipped product work.' },
+    ];
+---
+
+<BaseLayout locale={locale} title={`Ting-Ya Yang | ${t.eyebrow}`} description={t.intro}>
+  <section class="hero">
+    <div class="hero-copy">
+      <p class="eyebrow"><span></span>{t.eyebrow}</p>
+      <h1>Ting-Ya<br />Yang<span class="accent-dot">.</span></h1>
+      <p class="hero-intro">{t.intro}</p>
+      <div class="hero-actions">
+        <a class="primary-link" href="#work">{t.viewWork}<ArrowDown size={18} /></a>
+        <a class="text-link" href="mailto:hello@example.com">{t.contact}<ArrowUpRight size={17} /></a>
+      </div>
+    </div>
+    <div class="hero-profile" aria-label={t.availability}>
+      <div class="profile-mark" aria-hidden="true"><span>TY</span><i>2026</i></div>
+      <p><span class="status-dot"></span>{t.availability}</p>
+    </div>
+  </section>
+
+  <section class="section" id="work">
+    <div class="section-heading">
+      <p class="section-number">01</p>
+      <div><h2>{t.selectedWork}</h2><p>{t.workIntro}</p></div>
+    </div>
+    <ProjectCard locale={locale} {...project} />
+  </section>
+
+  <section class="section" id="experience">
+    <div class="section-heading">
+      <p class="section-number">02</p>
+      <div><h2>{t.experience}</h2><p>{t.experienceIntro}</p></div>
+    </div>
+    <div class="timeline">
+      {experience.map((item) => (
+        <article class="timeline-item">
+          <p class="timeline-period">{item.period}</p>
+          <div><h3>{item.role}</h3><p class="timeline-company">{item.company}</p><p>{item.detail}</p></div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section about-section" id="about">
+    <div class="section-heading">
+      <p class="section-number">03</p>
+      <h2>{t.about}</h2>
+    </div>
+    <p class="about-copy">{t.aboutBody}</p>
+  </section>
+</BaseLayout>
