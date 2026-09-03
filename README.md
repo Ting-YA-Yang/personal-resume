@@ -18,7 +18,7 @@ The local development server uses `/`. GitHub Actions automatically builds the p
 - Edit homepage copy and experience data in `src/components/HomePage.astro`.
 - Edit shared translations in `src/lib/i18n.ts`.
 - Add project case studies under `src/pages/projects/` and `src/pages/en/projects/`.
-- Replace the placeholder email and LinkedIn URL in the header, homepage, and footer.
+- Update contact links in `src/components/HomePage.astro` and `src/components/Footer.astro` when contact details change.
 
 ## Custom domain
 

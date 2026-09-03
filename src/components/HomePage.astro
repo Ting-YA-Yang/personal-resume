@@ -8,42 +8,60 @@ interface Props { locale: Locale }
 const { locale } = Astro.props;
 const t = copy[locale];
 
-const project = locale === 'zh'
-  ? {
-      title: '个人简历与作品集',
-      summary: '一个快速、可访问且易于长期维护的双语个人网站。',
-      role: '设计与开发', period: '2026', technologies: ['Astro', 'TypeScript', 'MDX'], slug: 'personal-site',
-    }
-  : {
-      title: 'Personal resume & portfolio',
-      summary: 'A fast, accessible bilingual home for selected work and professional experience.',
-      role: 'Design & development', period: '2026', technologies: ['Astro', 'TypeScript', 'MDX'], slug: 'personal-site',
-    };
+const projects = locale === 'zh'
+  ? [
+      { title: 'ServicesCentral', summary: 'eBay 支付服务管理门户，整合 Payments、Payout、交易、Dispute 等能力，采用 React SSR 与 BFF 架构。', role: '负责人 / 开发工程师', period: '2025-03 — 至今', technologies: ['React 19', 'TypeScript', 'Node.js', 'Express', 'Vite', 'BFF'], slug: 'services-central' },
+      { title: 'EasyFin', summary: '面向 Finance、Product Development 和 Product Management 团队的财务配置管理平台，支持 Excel 编辑、校验、审批与版本审计。', role: '开发工程师', period: '2025-03 — 至今', technologies: ['Java 17', 'Spring Boot 3', 'Apache POI', 'Maven', 'OpenAPI'], slug: 'easyfin' },
+      { title: 'FX Console', summary: '基于 React 的资金管理平台，提供资金数据展示、趋势分析和多终端操作体验。', role: '负责人 / 开发工程师', period: '2023-07 — 2024-03', technologies: ['Next.js', 'TypeScript', 'ECharts', 'Ant Design'], slug: 'fx-console' },
+    ]
+  : [
+      { title: 'ServicesCentral', summary: 'An eBay payment services portal combining Payments, Payouts, transactions, and disputes through React SSR and a BFF architecture.', role: 'Lead / Software Engineer', period: 'Mar 2025 — Present', technologies: ['React 19', 'TypeScript', 'Node.js', 'Express', 'Vite', 'BFF'], slug: 'services-central' },
+      { title: 'EasyFin', summary: 'A finance configuration platform for Excel-based editing, validation, approvals, versioning, and audit history.', role: 'Software Engineer', period: 'Mar 2025 — Present', technologies: ['Java 17', 'Spring Boot 3', 'Apache POI', 'Maven', 'OpenAPI'], slug: 'easyfin' },
+      { title: 'FX Console', summary: 'A React-based fund management platform with financial data visualization and responsive multi-device workflows.', role: 'Lead / Software Engineer', period: 'Jul 2023 — Mar 2024', technologies: ['Next.js', 'TypeScript', 'ECharts', 'Ant Design'], slug: 'fx-console' },
+    ];
 
 const experience = locale === 'zh'
   ? [
-      { period: '2024 — 至今', role: '软件工程师', company: '公司名称', detail: '负责核心产品体验与前端工程建设。' },
-      { period: '2022 — 2024', role: '前端工程师', company: '公司名称', detail: '构建可复用界面系统并推动产品交付。' },
+      { period: '2025-03 — 至今', role: '前端开发工程师', company: '亿贝软件工程（上海）有限公司', detail: '负责 ServicesCentral 与 EasyFin 项目开发，覆盖支付运营、财务配置、测试、安全与工程化建设。' },
+      { period: '2021-07 — 2024-03', role: '前端开发工程师', company: '亿贝软件工程（上海）有限公司', detail: '负责 FX Console 从 0 到 1 的架构、开发、性能优化、数据可视化与上线。' },
+      { period: '2019-07 — 2021-01', role: '前端开发工程师', company: '埃森哲（中国）有限公司', detail: '参与企业级前端项目交付与跨团队协作。' },
     ]
   : [
-      { period: '2024 — Present', role: 'Software Engineer', company: 'Company name', detail: 'Building core product experiences and frontend foundations.' },
-      { period: '2022 — 2024', role: 'Frontend Engineer', company: 'Company name', detail: 'Created reusable interface systems and shipped product work.' },
+      { period: 'Mar 2025 — Present', role: 'Frontend Engineer', company: 'eBay Software Technology (Shanghai) Co., Ltd.', detail: 'Developing ServicesCentral and EasyFin across payment operations, finance configuration, testing, security, and developer tooling.' },
+      { period: 'Jul 2021 — Mar 2024', role: 'Frontend Engineer', company: 'eBay Software Technology (Shanghai) Co., Ltd.', detail: 'Owned FX Console from architecture and development through performance optimization, visualization, and launch.' },
+      { period: 'Jul 2019 — Jan 2021', role: 'Frontend Engineer', company: 'Accenture China Co., Ltd.', detail: 'Delivered enterprise frontend projects in cross-functional teams.' },
+    ];
+
+const capabilities = locale === 'zh'
+  ? [
+      { label: '前端技术', items: 'HTML · CSS · JavaScript · TypeScript · Vue · React · React Router · Next.js' },
+      { label: '工程与性能', items: '浏览器原理 · 大型应用性能优化 · Vite · Git · ESLint · Stylelint · Prettier' },
+      { label: '服务端与数据', items: 'Node.js · Express · Java · Spring Boot · Apache POI · REST · OpenAPI' },
+      { label: '测试与交付', items: 'Vitest · React Testing Library · Playwright · Storybook · Jenkins · CI/CD' },
+      { label: '协作与语言', items: 'CEFR Level C1 · 英语听说读写 · 团队协作 · Mentoring · Confluence · JIRA' },
+    ]
+  : [
+      { label: 'Frontend', items: 'HTML · CSS · JavaScript · TypeScript · Vue · React · React Router · Next.js' },
+      { label: 'Engineering & performance', items: 'Browser fundamentals · large-application performance · Vite · Git · ESLint · Stylelint · Prettier' },
+      { label: 'Backend & data', items: 'Node.js · Express · Java · Spring Boot · Apache POI · REST · OpenAPI' },
+      { label: 'Testing & delivery', items: 'Vitest · React Testing Library · Playwright · Storybook · Jenkins · CI/CD' },
+      { label: 'Collaboration & language', items: 'CEFR Level C1 · fluent English · teamwork · mentoring · Confluence · JIRA' },
     ];
 ---
 
-<BaseLayout locale={locale} title={`Ting-Ya Yang | ${t.eyebrow}`} description={t.intro}>
+<BaseLayout locale={locale} title={`${locale === 'zh' ? '杨慧婷' : 'Hui-Ting Yang'} | ${t.eyebrow}`} description={t.intro}>
   <section class="hero">
     <div class="hero-copy">
       <p class="eyebrow"><span></span>{t.eyebrow}</p>
-      <h1>Ting-Ya<br />Yang<span class="accent-dot">.</span></h1>
+      <h1>{locale === 'zh' ? <>杨慧婷<span class="accent-dot">.</span></> : <>Hui-Ting<br />Yang<span class="accent-dot">.</span></>}</h1>
       <p class="hero-intro">{t.intro}</p>
       <div class="hero-actions">
         <a class="primary-link" href="#work">{t.viewWork}<ArrowDown size={18} /></a>
-        <a class="text-link" href="mailto:hello@example.com">{t.contact}<ArrowUpRight size={17} /></a>
+        <a class="text-link" href="mailto:yanghuiting2333@163.com">{t.contact}<ArrowUpRight size={17} /></a>
       </div>
     </div>
     <div class="hero-profile" aria-label={t.availability}>
-      <div class="profile-mark" aria-hidden="true"><span>TY</span><i>2026</i></div>
+      <div class="profile-mark" aria-hidden="true"><span>HT</span><i>2019 — NOW</i></div>
       <p><span class="status-dot"></span>{t.availability}</p>
     </div>
   </section>
@@ -53,7 +71,9 @@ const experience = locale === 'zh'
       <p class="section-number">01</p>
       <div><h2>{t.selectedWork}</h2><p>{t.workIntro}</p></div>
     </div>
-    <ProjectCard locale={locale} {...project} />
+    <div class="project-list">
+      {projects.map((project) => <ProjectCard locale={locale} {...project} />)}
+    </div>
   </section>
 
   <section class="section" id="experience">
@@ -76,6 +96,17 @@ const experience = locale === 'zh'
       <p class="section-number">03</p>
       <h2>{t.about}</h2>
     </div>
-    <p class="about-copy">{t.aboutBody}</p>
+    <div class="capability-list">
+      {capabilities.map((capability) => (
+        <div class="capability-row">
+          <strong>{capability.label}</strong>
+          <span>{capability.items}</span>
+        </div>
+      ))}
+    </div>
+    <div class="education-row">
+      <span>{locale === 'zh' ? '教育背景' : 'Education'}</span>
+      <strong>{locale === 'zh' ? '2015-09 — 2019-07 · 华东交通大学 · 软件工程（本科）' : 'Sep 2015 — Jul 2019 · East China Jiaotong University · B.S. Software Engineering'}</strong>
+    </div>
   </section>
 </BaseLayout>

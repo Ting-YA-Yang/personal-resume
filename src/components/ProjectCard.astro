@@ -14,20 +14,19 @@ interface Props {
 
 const { locale, title, summary, role, period, technologies, slug } = Astro.props;
 const href = locale === 'zh' ? `/projects/${slug}/` : `/en/projects/${slug}/`;
+const visual = {
+  'services-central': { mark: 'SC', domain: locale === 'zh' ? '支付服务' : 'PAYMENT SERVICES' },
+  easyfin: { mark: 'EF', domain: locale === 'zh' ? '财务配置' : 'FINANCE CONFIGURATION' },
+  'fx-console': { mark: 'FX', domain: locale === 'zh' ? '资金管理' : 'FUND MANAGEMENT' },
+}[slug] ?? { mark: title.slice(0, 2).toUpperCase(), domain: locale === 'zh' ? '项目案例' : 'CASE STUDY' };
 ---
 
 <article class="project-card">
   <a class="project-visual" href={withBase(href)} aria-label={`${copy[locale].viewCase}: ${title}`}>
-    <div class="visual-window" aria-hidden="true">
-      <div class="visual-toolbar"><i></i><i></i><i></i></div>
-      <div class="visual-layout">
-        <span class="visual-index">01</span>
-        <div>
-          <span class="visual-line wide"></span>
-          <span class="visual-line"></span>
-          <span class="visual-block"></span>
-        </div>
-      </div>
+    <div class="project-identity" aria-hidden="true">
+      <span class="project-domain">{visual.domain}</span>
+      <strong>{visual.mark}</strong>
+      <span class="project-name">{title}</span>
     </div>
   </a>
   <div class="project-copy">

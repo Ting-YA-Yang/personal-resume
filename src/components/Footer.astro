@@ -1,5 +1,5 @@
 ---
-import { BriefcaseBusiness, Code2, Mail } from 'lucide-react';
+import { Code2, Mail } from 'lucide-react';
 import { copy, type Locale } from '../lib/i18n';
 
 interface Props { locale: Locale }
@@ -10,15 +10,17 @@ const t = copy[locale];
 <footer class="site-footer" id="contact">
   <div>
     <p class="footer-heading">{locale === 'zh' ? '保持联系' : 'Stay in touch'}</p>
-    <a class="footer-email" href="mailto:hello@example.com">hello@example.com</a>
+    <div class="footer-emails">
+      <a class="footer-email" href="mailto:yanghuiting2333@163.com">yanghuiting2333@163.com</a>
+      <a class="footer-email" href="mailto:vicky18yang@gmail.com">vicky18yang@gmail.com</a>
+    </div>
   </div>
   <div class="footer-meta">
     <div class="social-links" aria-label={locale === 'zh' ? '社交链接' : 'Social links'}>
       <a href="https://github.com/Ting-YA-Yang" aria-label="GitHub" title="GitHub"><Code2 size={19} /></a>
-      <a href="https://www.linkedin.com/" aria-label="LinkedIn" title="LinkedIn"><BriefcaseBusiness size={19} /></a>
-      <a href="mailto:hello@example.com" aria-label="Email" title="Email"><Mail size={19} /></a>
+      <a href="mailto:yanghuiting2333@163.com" aria-label="Email" title="Email"><Mail size={19} /></a>
     </div>
     <p>{t.footerLine}</p>
-    <p>© {new Date().getFullYear()} Ting-Ya Yang</p>
+    <p>© {new Date().getFullYear()} {locale === 'zh' ? '杨慧婷' : 'Hui-Ting Yang'}</p>
   </div>
 </footer>
